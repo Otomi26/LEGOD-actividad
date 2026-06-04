@@ -10,17 +10,17 @@
         
         $sql = "SELECT set_num, name, year, num_parts, theme_id
                 FROM sets 
-                WHERE name LIKE '%" . $texto_buscado . "%'";
+                WHERE name LIKE '%" . $texto_buscado . "%'"; //consulta
 
-        $resultado_query = mysqli_query($conexion, $sql); //regresa una iterable // lee las filas?
+        $resultado_query = mysqli_query($conexion, $sql); //regresa un objeto iterable // lee las filas?
         
-        if ($resultado_query) 
+        if ($resultado_query) //si es verdadero o no es falso, hay un objeto
         {
             while ($fila = mysqli_fetch_assoc($resultado_query)) //mysqli_fetch_assoc hace que la fila se vuelva un arreglo asociativo
             {
                 $theme_id = $fila["theme_id"];
                 
-                $sql2 = "SELECT name FROM themes WHERE theme_id = $theme_id";
+                $sql2 = "SELECT name FROM themes WHERE theme_id = $theme_id"; 
                 $query2 = mysqli_query($conexion, $sql2);
                 
                 if ($query2) {
@@ -34,6 +34,7 @@
                 }
                 
                 $lista_resultados[] = $fila;
+               // var_dump($lista_resultados); 
             }
         }
     }

@@ -1,5 +1,26 @@
 <?php
+    include 'config.php';
+    
+    $mensaje ="";
+    $clase_mensaje = "";
 
+    if($_SERVER["REQUEST_METHOD"] == 'POST' && ($_POST['set_a_eliminar']))
+    {
+        $id_set = $_POST["set_a_eliminar"];
+        $sql = "DELETE FROM sets WHERE set_num = 'id_set'";
+        $query = mysqli_query($conexion, $sql);
+        if($query)
+        {
+            $mensaje = "La eliminación fue correcta";
+            $clase_mensaje = "mensaje-exito";
+        }
+        else {
+            $mensaje = "La eliminación NO fue correcta";
+            $clase_mensaje = "mensaje-error";
+        }
+
+    }
+                                                                                      
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +41,7 @@
     <div class="mensaje <?php  ?>">
         <h3>Resultado de la operación:</h3>
         <!-- PHP --> 
-        <p><?php  ?></p>
+        <p><?php  echo $mensaje ?></p>
         <br>
         <a href="index.html" style="color: #000; font-weight:bold;">Volver a los resultados de búsqueda</a>
     </div>
